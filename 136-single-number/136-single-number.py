@@ -1,17 +1,18 @@
 class Solution:
     def singleNumber(self, nums: List[int]) -> int:
         answer = 0
-        lst = []
-        twice = []
+        d = dict()
         
         for i in nums:
-            if i not in lst:
-                lst.append(i)
+            if i in d:
+                d[i] += 1
             else:
-                if i not in twice:
-                    twice.append(i)
-                    
-        answer = list(set(lst) - set(twice))[0]
+                d[i] = 0
+        
+        for i in d:
+            if d[i] == 0:
+                answer = i
+                break
             
         return answer
         
