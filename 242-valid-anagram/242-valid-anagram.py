@@ -1,26 +1,27 @@
 class Solution:
     def isAnagram(self, s: str, t: str) -> bool:
         answer = True
-        s_dict = dict()
+        check = dict()
         
-        for i in s:
-            if i in s_dict:
-                s_dict[i] += 1
+        if len(s) != len(t):
+            return False
+        
+        for i in range(len(s)):
+            if s[i] in check:
+                check[s[i]] += 1
             else:
-                s_dict[i] = 1
+                check[s[i]] = 1
         
-        for k in t:
-            if k in s_dict:
-                s_dict[k] -= 1
-                if s_dict[k] < 0:
-                    answer = False
-                    break
+            
+            if t[i] in check:
+                check[t[i]] -= 1
             else:
-                answer = False
-                break
+                check[t[i]] = -1
         
-        for sd in s_dict:
-            if s_dict[sd] != 0:
+        
+
+        for sd in check:
+            if check[sd] != 0:
                 answer = False
                 break
         
